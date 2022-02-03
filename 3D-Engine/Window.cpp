@@ -14,6 +14,7 @@ Window::Window(unsigned int Width, unsigned int Height,
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_SAMPLES, 8);
 
 	m_Window = glfwCreateWindow(Width, Height, Title, Fullscreen ? glfwGetPrimaryMonitor() : nullptr, nullptr);
 
@@ -31,6 +32,12 @@ Window::Window(unsigned int Width, unsigned int Height,
 	glfwMakeContextCurrent(m_Window);
 	
 	SetVsync(true);
+
+	if (glewInit() != GLEW_OK)
+	{
+		std::cerr << "GLEW failed to initialize!" << std::endl;
+		exit(-1);
+	}
 }
 
 void Window::SetVsync(bool enabled)

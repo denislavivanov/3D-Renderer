@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGL", "OpenGL\OpenGL.vcxproj", "{59374332-4292-46AD-B899-6D7F037B0CAF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3D-Engine", "3D-Engine\3D-Engine.vcxproj", "{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Debug|x64.ActiveCfg = Debug|x64
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Debug|x64.Build.0 = Debug|x64
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Debug|x86.ActiveCfg = Debug|Win32
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Debug|x86.Build.0 = Debug|Win32
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Release|x64.ActiveCfg = Release|x64
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Release|x64.Build.0 = Release|x64
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Release|x86.ActiveCfg = Release|Win32
-		{59374332-4292-46AD-B899-6D7F037B0CAF}.Release|x86.Build.0 = Release|Win32
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Debug|x64.ActiveCfg = Debug|x64
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Debug|x64.Build.0 = Debug|x64
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Debug|x86.ActiveCfg = Debug|Win32
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Debug|x86.Build.0 = Debug|Win32
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Release|x64.ActiveCfg = Release|x64
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Release|x64.Build.0 = Release|x64
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Release|x86.ActiveCfg = Release|Win32
+		{92F3CB7B-D89D-425D-8DD2-41419F68EBCB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4919728B-CA6C-463D-81B7-DF4C56FE90B1}
+		SolutionGuid = {E14C1905-4FC1-451D-9780-914D269E1CED}
 	EndGlobalSection
 EndGlobal

@@ -2,52 +2,57 @@
 
 #include <iostream>
 
+
 Renderer::Renderer()
+	: m_Window(1280, 1024),
+	  m_Shader("Shaders/vertex.shader", "Shaders/fragment.shader"),
+	  m_Model("assets/head/")
 {
 	Init();
 }
 
 Renderer::~Renderer()
 {
-	delete shader;
-	delete VAO;
-	delete VBO;
-	delete EBO;
-	delete tex;
 }
 
 void Renderer::Run()
 {
 	while (!glfwWindowShouldClose(m_Window.GetWindow()))
 	{
-		glClearColor(0.3984f, 0.0f, 0.2f, 1.f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shader->Bind();
-		VAO->Bind();
+		m_Model.Draw(m_Shader);
 
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 		m_Window.OnUpdate();
 	}
 }
 
 void Renderer::Init()
 {
-	if (glewInit() != GLEW_OK)
-	{
-		std::cerr << "GLEW failed to initialize!" << std::endl;
-		exit(-1);
-	}
-
+	glEnable(GL_MULTISAMPLE);
+	glEnable(GL_DEPTH_TEST);
 	/*glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
 
-	float vertices[] = {
+	/*float vertices[] = {
 		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f,
 		 0.0f,  0.5f, 0.0f, 0.5f, 1.0f
+	};*/
+
+	/*float vertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.5f,  0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f,
+		 0.0f, 0.0f,
+		 1.0f, 0.0f,
+		 1.0f, 1.0f,
+		 0.0f, 1.0f,
+		 0.5f, 1.0f
 	};
 
 	unsigned int indices[] = {
@@ -55,9 +60,20 @@ void Renderer::Init()
 		0, 2, 3
 	};
 
-	shader = new Shader("vertex.shader", "fragment.shader");
+	m_Mesh.vertices = new float[25];
+	m_Mesh.indices = new unsigned int[6];
 
-	VAO = new VertexArray();
+	memcpy(m_Mesh.vertices, vertices, 25 * sizeof(float));
+	memcpy(m_Mesh.indices, indices, 6 * sizeof(unsigned int));
+
+	m_Mesh.SetIndexCount(6);
+	m_Mesh.SetDataCount(25);
+	m_Mesh.SetTextureOffset(15 * sizeof(float));
+
+	m_Mesh.LoadTexture("assets/head/textures/material_0_baseColor.png");
+	m_Mesh.Load();*/
+
+	/*VAO = new VertexArray();
 	VBO = new VertexBuffer(vertices, sizeof(vertices));
 	EBO = new IndexBuffer(indices, sizeof(indices));
 	tex = new Texture("assets/textures/Checkerboard.png");
@@ -68,5 +84,5 @@ void Renderer::Init()
 	VAO->SetIndexBuffer(EBO);
 
 	VBO->SetLayout(0, 3, 20, 0);
-	VBO->SetLayout(1, 2, 20, 12);
+	VBO->SetLayout(1, 2, 20, 12);*/
 }

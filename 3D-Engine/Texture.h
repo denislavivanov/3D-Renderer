@@ -2,13 +2,17 @@
 #include <iostream>
 #include <GL/glew.h>
 
-#include "stb_image.h"
+#include "stb/stb_image.h"
 
 class Texture
 {
 public:
+	Texture();
 	Texture(const std::string& path);
 	~Texture();
+
+	void Load(const std::string& path);
+	void Destroy();
 
 	unsigned int GetWidth() const;
 	unsigned int GetHeight() const;

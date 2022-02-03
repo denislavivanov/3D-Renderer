@@ -1,8 +1,21 @@
 #include "Texture.h"
 
+Texture::Texture()
+{
+}
+
 Texture::Texture(const std::string& path)
 {
-	stbi_set_flip_vertically_on_load(true);
+	Load(path);
+}
+
+Texture::~Texture()
+{
+}
+
+void Texture::Load(const std::string& path)
+{
+	//stbi_set_flip_vertically_on_load(true);
 
 	unsigned char* p = stbi_load(path.c_str(), &m_Width, &m_Height, &m_Channels, 0);
 
@@ -32,7 +45,7 @@ Texture::Texture(const std::string& path)
 	stbi_image_free(p);
 }
 
-Texture::~Texture()
+void Texture::Destroy()
 {
 	glDeleteTextures(1, &m_TextureID);
 }

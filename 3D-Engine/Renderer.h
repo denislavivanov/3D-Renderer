@@ -3,10 +3,11 @@
 #include <GLFW/glfw3.h>
 #include "Window.h"
 #include "Shader.h"
-#include "VertexArray.h"
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
+#include "Buffers/VertexArray.h"
+#include "Buffers/VertexBuffer.h"
+#include "Buffers/IndexBuffer.h"
 #include "Texture.h"
+#include "Model.h"
 
 
 class Renderer
@@ -22,11 +23,9 @@ private:
 	void Init();
 
 private:
-	Shader* shader;
-	VertexArray* VAO;
-	VertexBuffer* VBO;
-	IndexBuffer* EBO;
-	Texture* tex;
 	Window m_Window;
+	Shader m_Shader;
+	Model m_Model;
+	//Mesh m_Mesh;
 };
 

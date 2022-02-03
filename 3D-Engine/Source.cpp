@@ -4,9 +4,9 @@
 
 int main()
 {
-    Renderer* renderer = new Renderer();
+    Renderer renderer;
 
-    renderer->Run();
+    renderer.Run();
 
     return 0;
 }
