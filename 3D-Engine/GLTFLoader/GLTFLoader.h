@@ -9,6 +9,6 @@ public:
 	static void Load(const std::string& path, std::vector<Mesh>& meshes);
 
 private:
-	static void LoadBuffer(const std::string& path, std::vector<unsigned char>& buffer);
+	static bool LoadBuffer(const std::string& path, std::vector<unsigned char>& buffer);
 };
 

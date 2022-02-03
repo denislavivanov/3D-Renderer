@@ -16,7 +16,8 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 
 	buffer.reserve(gltf["buffers"][0]["byteLength"]);
 
-	LoadBuffer(path + std::string(gltf["buffers"][0]["uri"]), buffer);
+	if (!LoadBuffer(path + std::string(gltf["buffers"][0]["uri"]), buffer))
+		return;
 
 	unsigned char* ptr_buffer = buffer.data();
 
@@ -102,11 +103,19 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 	}
 }
 
-void GLTFLoader::LoadBuffer(const std::string& path, std::vector<unsigned char>& buffer)
+bool GLTFLoader::LoadBuffer(const std::string& path, std::vector<unsigned char>& buffer)
 {
 	std::ifstream file(path, std::ios::in | std::ios::binary);
+
+	if (!file.is_open())
+	{
+		std::cerr << path + " failed to open!" << std::endl;
+		return false;
+	}
 
 	file.read((char*)buffer.data(), buffer.capacity());
 
 	file.close();
+
+	return true;
 }

@@ -7,13 +7,13 @@ class Shader
 public:
 	std::string Load(const char* path);
 
-	GLuint Compile(GLuint type, std::string* source);
+	GLuint Compile(GLuint type, const std::string& source);
 
 	void CompileError(GLuint ShaderID);
 
 	void LinkError();
 
-	GLuint GetID() { return m_ProgramID; }
+	GLuint GetID();
 
 	void Bind() const;
 

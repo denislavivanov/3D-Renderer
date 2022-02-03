@@ -8,8 +8,8 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     std::string VertexSource = Load(vertexPath);
     std::string FragmentSource = Load(fragmentPath);
 
-    GLuint VertexID = Compile(GL_VERTEX_SHADER, &VertexSource);
-    GLuint FragmentID = Compile(GL_FRAGMENT_SHADER, &FragmentSource);
+    GLuint VertexID = Compile(GL_VERTEX_SHADER, VertexSource);
+    GLuint FragmentID = Compile(GL_FRAGMENT_SHADER, FragmentSource);
 
     m_ProgramID = glCreateProgram();
     glAttachShader(m_ProgramID, VertexID);
@@ -69,7 +69,7 @@ void Shader::CompileError(GLuint ShaderID)
 void Shader::LinkError()
 {
     int return_code;
-    glGetProgramiv(m_ProgramID, GL_COMPILE_STATUS, &return_code);
+    glGetProgramiv(m_ProgramID, GL_LINK_STATUS, &return_code);
 
     if (return_code == GL_FALSE)
     {
@@ -89,11 +89,11 @@ void Shader::LinkError()
     }
 }
 
-GLuint Shader::Compile(GLuint type, std::string* source)
+GLuint Shader::Compile(GLuint type, const std::string& source)
 {
     GLuint m_ShaderID = glCreateShader(type);
 
-    const GLchar* p = source->c_str();
+    const GLchar* p = source.c_str();
 
     glShaderSource(m_ShaderID, 1, &p, NULL);
 
@@ -117,4 +117,9 @@ void Shader::Bind() const
 void Shader::Unbind() const
 {
     glUseProgram(0);
+}
+
+GLuint Shader::GetID()
+{
+    return m_ProgramID;
 }
