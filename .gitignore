@@ -1,0 +1,8 @@
+.vs/
+*.idb
+*.pdg
+Debug/
+Release/
+3D-Engine/Debug/
+3D-Engine/Release/
+3D-Engine/x64/
