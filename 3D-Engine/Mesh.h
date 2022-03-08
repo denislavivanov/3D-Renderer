@@ -21,11 +21,12 @@ public:
 	void SetDataCount(int count);
 	void SetTextureOffset(int offset);
 
-public:
+	friend class GLTFLoader;
+
+private:
 	float* vertices;
 	unsigned* indices;
 
-private:
 	int m_IndexCount;
 	int m_DataCount;
 	int m_TextureOffset;

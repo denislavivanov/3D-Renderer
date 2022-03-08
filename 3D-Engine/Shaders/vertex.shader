@@ -5,12 +5,12 @@ layout(location = 1) in vec2 aTexCoords;
 
 out vec2 vTexCoords;
 
+uniform mat4 view;
+uniform mat4 projection;
 
 void main()
 {
 	vTexCoords = aTexCoords;
 
-    vec4 diff = vec4(0.0f, -0.6f, 0.0f, 0.0f);
-
-	gl_Position = vec4(-0.5f * aPos, 1.0f) + diff;
+	gl_Position = projection * view * vec4(0.5 * -aPos, 1.0f);
 }
