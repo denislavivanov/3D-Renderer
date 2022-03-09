@@ -75,8 +75,3 @@ Window::~Window()
 {
 	Window::Destroy();
 }
-
-void Window::SetEvents()
-{
-	
-}

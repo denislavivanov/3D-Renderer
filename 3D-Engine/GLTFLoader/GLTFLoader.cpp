@@ -29,6 +29,7 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 		{
 			auto& index_accessor = gltf["accessors"][(int)mesh["primitives"][0]["indices"]];
 			auto& index_bufferview = gltf["bufferViews"][(int)index_accessor["bufferView"]];
+			
 			int index_accessor_offset = index_accessor.contains("byteOffset") ? (int)index_accessor["byteOffset"] : 0;
 			int start = index_bufferview["byteOffset"] + index_accessor_offset;
 			int index_count = index_accessor["count"];
@@ -92,10 +93,12 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 		}
 
 		{
-			auto& material = gltf["materials"][(int)mesh["primitives"][0]["material"]];
-			auto& texture = gltf["textures"][(int)material["pbrMetallicRoughness"]["baseColorTexture"]["index"]];
-
-			current_mesh.LoadTexture(path + std::string(gltf["images"][(int)texture["source"]]["uri"]));
+			if (gltf.contains("textures"))
+			{
+				auto& material = gltf["materials"][(int)mesh["primitives"][0]["material"]];
+				auto& texture = gltf["textures"][(int)material["pbrMetallicRoughness"]["baseColorTexture"]["index"]];
+				current_mesh.LoadTexture(path + std::string(gltf["images"][(int)texture["source"]]["uri"]));
+			}
 		}
 
 		current_mesh.Load();

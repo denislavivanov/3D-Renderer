@@ -1,13 +1,12 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Window.h"
 #include "Shader.h"
-#include "Buffers/VertexArray.h"
-#include "Buffers/VertexBuffer.h"
-#include "Buffers/IndexBuffer.h"
-#include "Texture.h"
 #include "Model.h"
+#include "Camera/Camera.h"
 
 
 class Renderer
@@ -19,13 +18,23 @@ public:
 
 	void Run();
 
-private:
-	void Init();
+	void KeyboardInput(GLFWwindow* window);
+
+	static void MouseInput(GLFWwindow* window, double x, double y);
+	static void ScrollInput(GLFWwindow* window, double x, double y);
 
 private:
 	Window m_Window;
 	Shader m_Shader;
 	Model m_Model;
-	//Mesh m_Mesh;
+	
+	static Camera m_Camera;
+	static glm::vec2 m_LastMousePosition;
+
+	int m_ViewLocation;
+	int m_ProjectionLocation;
+
+	glm::mat4 m_ViewMatrix;
+	glm::mat4 m_ProjectionMatrix;
 };
 
