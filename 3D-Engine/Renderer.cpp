@@ -12,7 +12,8 @@ glm::vec2 Renderer::m_LastMousePosition;
 Renderer::Renderer()
 	: m_Window(1280, 1024),
 	  m_Shader("Shaders/vertex.shader", "Shaders/fragment.shader"),
-	  m_Model("assets/head/")
+	  m_Model("assets/head/"),
+	  m_AntiAliasing(true)
 {
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
@@ -22,6 +23,23 @@ Renderer::Renderer()
 	glfwSetScrollCallback(m_Window.GetWindow(), ScrollInput);
 
 	m_ViewLocation		 = glGetUniformLocation(m_Shader.GetID(), "view");
+	m_ProjectionLocation = glGetUniformLocation(m_Shader.GetID(), "projection");
+}
+
+Renderer::Renderer(const std::string& scenePath)
+	: m_Window(1280, 1024),
+	  m_Shader("Shaders/vertex.shader", "Shaders/fragment.shader"),
+	  m_Model(scenePath),
+	  m_AntiAliasing(true)
+{
+	glEnable(GL_MULTISAMPLE);
+	glEnable(GL_DEPTH_TEST);
+
+	glfwSetInputMode(m_Window.GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetCursorPosCallback(m_Window.GetWindow(), MouseInput);
+	glfwSetScrollCallback(m_Window.GetWindow(), ScrollInput);
+
+	m_ViewLocation = glGetUniformLocation(m_Shader.GetID(), "view");
 	m_ProjectionLocation = glGetUniformLocation(m_Shader.GetID(), "projection");
 }
 
@@ -56,11 +74,29 @@ void Renderer::Run()
 	}
 }
 
+void Renderer::SetAntiAliasing(bool enabled)
+{
+	if (enabled)
+	{
+		glEnable(GL_MULTISAMPLE);
+	}
+	else
+	{
+		glDisable(GL_MULTISAMPLE);
+	}
+}
+
 void Renderer::KeyboardInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+	{
+		m_AntiAliasing = !m_AntiAliasing;
+		SetAntiAliasing(m_AntiAliasing);
 	}
 
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)

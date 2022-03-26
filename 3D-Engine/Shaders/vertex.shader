@@ -12,5 +12,5 @@ void main()
 {
 	vTexCoords = aTexCoords;
 
-	gl_Position = projection * view * vec4(0.5 * -aPos, 1.0f);
+	gl_Position = projection * view * vec4(-0.5f * aPos, 1.0f);
 }

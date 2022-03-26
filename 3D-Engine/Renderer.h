@@ -1,4 +1,5 @@
 #pragma once
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -13,10 +14,12 @@ class Renderer
 {
 public:
 	Renderer();
+	Renderer(const std::string& scenePath);
 
 	~Renderer();
 
 	void Run();
+	void SetAntiAliasing(bool enabled);
 
 	void KeyboardInput(GLFWwindow* window);
 
@@ -30,6 +33,8 @@ private:
 	
 	static Camera m_Camera;
 	static glm::vec2 m_LastMousePosition;
+
+	bool m_AntiAliasing;
 
 	int m_ViewLocation;
 	int m_ProjectionLocation;

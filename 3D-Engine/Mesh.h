@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Shader.h"
 #include "Buffers/VertexArray.h"
 #include "Buffers/VertexBuffer.h"
@@ -17,9 +18,11 @@ public:
 	void Free();
 	void Destroy();
 	void LoadTexture(const std::string& path);
+	
 	void SetIndexCount(int count);
 	void SetDataCount(int count);
 	void SetTextureOffset(int offset);
+	void SetFlipTexture(bool enabled);
 
 	friend class GLTFLoader;
 
