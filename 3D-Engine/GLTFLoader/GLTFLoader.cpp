@@ -99,6 +99,10 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 				auto& texture = gltf["textures"][(int)material["pbrMetallicRoughness"]["baseColorTexture"]["index"]];
 				current_mesh.LoadTexture(path + std::string(gltf["images"][(int)texture["source"]]["uri"]));
 			}
+			else
+			{
+				current_mesh.LoadTexture("assets/missing.jpg");
+			}
 		}
 
 		current_mesh.Load();

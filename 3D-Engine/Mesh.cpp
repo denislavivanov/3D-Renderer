@@ -2,6 +2,11 @@
 
 
 Mesh::Mesh()
+	: m_DataCount(0),
+	  m_IndexCount(0),
+	  m_TextureOffset(0),
+	  indices(nullptr),
+	  vertices(nullptr)
 {
 }
 
@@ -10,8 +15,11 @@ Mesh::Mesh(std::vector<float>& vertices, std::vector<unsigned>& indices)
 	  m_IndexCount(indices.size()),
 	  m_TextureOffset(0)
 {
-	this->vertices = vertices.data();
-	this->indices = indices.data();
+	this->vertices = new float[m_DataCount];
+	this->indices = new unsigned[m_IndexCount];
+
+	std::copy(vertices.begin(), vertices.end(), this->vertices);
+	std::copy(indices.begin(), indices.end(), this->indices);
 }
 
 void Mesh::Draw(Shader& shader)
@@ -64,6 +72,11 @@ void Mesh::SetIndexCount(int count)
 void Mesh::SetTextureOffset(int offset)
 {
 	m_TextureOffset = offset;
+}
+
+void Mesh::SetFlipTexture(bool enabled)
+{
+	m_Texture.SetFlipped(enabled);
 }
 
 void Mesh::SetDataCount(int count)

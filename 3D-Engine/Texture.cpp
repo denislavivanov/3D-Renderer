@@ -1,10 +1,16 @@
 #include "Texture.h"
 
 Texture::Texture()
+	: m_Height(0), 
+	  m_Width(0), 
+	  m_Channels(0), 
+	  m_TextureID(0), 
+	  m_Flipped(false)
 {
 }
 
-Texture::Texture(const std::string& path)
+Texture::Texture(const std::string& path, bool flipped)
+	: m_Flipped(flipped)
 {
 	Load(path);
 }
@@ -15,7 +21,10 @@ Texture::~Texture()
 
 void Texture::Load(const std::string& path)
 {
-	//stbi_set_flip_vertically_on_load(true);
+	if (m_Flipped)
+	{
+		stbi_set_flip_vertically_on_load(true);
+	}
 
 	unsigned char* p = stbi_load(path.c_str(), &m_Width, &m_Height, &m_Channels, 0);
 
@@ -48,6 +57,11 @@ void Texture::Load(const std::string& path)
 void Texture::Destroy()
 {
 	glDeleteTextures(1, &m_TextureID);
+}
+
+void Texture::SetFlipped(bool enabled)
+{
+	m_Flipped = enabled;
 }
 
 unsigned int Texture::GetWidth() const

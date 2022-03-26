@@ -12,11 +12,9 @@ public:
 	~IndexBuffer();
 
 	void Load(unsigned int* indices, unsigned int size);
-
 	void Destroy();
 
 	void Bind() const;
-
 	void Unbind() const;
 
 private:

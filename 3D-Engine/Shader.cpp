@@ -96,7 +96,6 @@ GLuint Shader::Compile(GLuint type, const std::string& source)
     const GLchar* p = source.c_str();
 
     glShaderSource(m_ShaderID, 1, &p, NULL);
-
     glCompileShader(m_ShaderID);
 
     CompileError(m_ShaderID);
