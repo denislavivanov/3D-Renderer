@@ -19,12 +19,16 @@ public:
 	~Renderer();
 
 	void Run();
+
+
+protected:
+	void KeyboardInput(GLFWwindow* window);
 	void SetAntiAliasing(bool enabled);
 
-	void KeyboardInput(GLFWwindow* window);
-
+	static void ToggleAntiAliasing();
 	static void MouseInput(GLFWwindow* window, double x, double y);
 	static void ScrollInput(GLFWwindow* window, double x, double y);
+	static void MSAAInput(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 private:
 	Window m_Window;
@@ -33,8 +37,7 @@ private:
 	
 	static Camera m_Camera;
 	static glm::vec2 m_LastMousePosition;
-
-	bool m_AntiAliasing;
+	static bool m_AntiAliasing;
 
 	int m_ViewLocation;
 	int m_ProjectionLocation;

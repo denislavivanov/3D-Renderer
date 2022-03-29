@@ -10,14 +10,23 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 	std::ifstream file(path + "scene.gltf", std::ios::in);
 	json gltf;
 
+	if (!file.is_open())
+	{
+		std::cerr << path + "scene.gltf" + " failed to open!" << std::endl;
+		exit(-1);
+	}
+
 	file >> gltf;
 
 	file.close();
 
 	buffer.reserve(gltf["buffers"][0]["byteLength"]);
 
-	if (!LoadBuffer(path + std::string(gltf["buffers"][0]["uri"]), buffer))
+	if (LoadBuffer(path + std::string(gltf["buffers"][0]["uri"]), buffer) == false)
+	{
+		std::cerr << path + std::string(gltf["buffers"][0]["uri"]) + " failed to load!" << std::endl;
 		return;
+	}
 
 	unsigned char* ptr_buffer = buffer.data();
 
@@ -43,7 +52,7 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 
 				for (int i = 0; i < index_count; ++i)
 				{
-					current_mesh.indices[i] = *(unsigned int*)(ptr_buffer + start + i * stride);
+					current_mesh.indices[i] = *(unsigned int*)(ptr_buffer + start + (unsigned long long)i * stride);
 				}
 			}
 			else //short
@@ -52,7 +61,7 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 
 				for (int i = 0; i < index_count; ++i)
 				{
-					current_mesh.indices[i] = *(unsigned short*)(ptr_buffer + start + i * stride);
+					current_mesh.indices[i] = *(unsigned short*)(ptr_buffer + start + (unsigned long long)i * stride);
 				}
 			}
 		}
@@ -76,19 +85,20 @@ void GLTFLoader::Load(const std::string& path, std::vector<Mesh>& meshes)
 
 			current_mesh.SetDataCount(3 * vertex_count + 2 * tex_count);
 			current_mesh.SetTextureOffset(3 * vertex_count * sizeof(float));
-			current_mesh.vertices = new float[3 * vertex_count + 2 * tex_count];
+			current_mesh.vertices = new float[3 * (unsigned long long)vertex_count + 
+				2 * (unsigned long long)tex_count];
 
 			for (int i = 0, j = 0; i < vertex_count; ++i, j += 3)
 			{
-				current_mesh.vertices[j] = *(float*)(ptr_buffer + vertex_start + i * vertex_stride);
-				current_mesh.vertices[j + 1] = *(float*)(ptr_buffer + vertex_start + i * vertex_stride + 4);
-				current_mesh.vertices[j + 2] = *(float*)(ptr_buffer + vertex_start + i * vertex_stride + 8);
+				current_mesh.vertices[j] = *(float*)(ptr_buffer + vertex_start + (unsigned long long)i * vertex_stride);
+				current_mesh.vertices[j + 1] = *(float*)(ptr_buffer + vertex_start + (unsigned long long)i * vertex_stride + 4);
+				current_mesh.vertices[j + 2] = *(float*)(ptr_buffer + vertex_start + (unsigned long long)i * vertex_stride + 8);
 			}
 
 			for (int i = 0, j = vertex_count * 3; i < tex_count; ++i, j += 2)
 			{
-				current_mesh.vertices[j] = *(float*)(ptr_buffer + tex_start + i * tex_stride);
-				current_mesh.vertices[j + 1] = *(float*)(ptr_buffer + tex_start + i * tex_stride + 4);
+				current_mesh.vertices[j] = *(float*)(ptr_buffer + tex_start + (unsigned long long)i * tex_stride);
+				current_mesh.vertices[j + 1] = *(float*)(ptr_buffer + tex_start + (unsigned long long)i * tex_stride + 4);
 			}
 		}
 
