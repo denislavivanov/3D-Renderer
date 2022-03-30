@@ -14,7 +14,7 @@ bool	  Renderer::m_AntiAliasing = false;
 Renderer::Renderer()
 	: m_Window(1280, 1024),
 	  m_Shader("Shaders/vertex.shader", "Shaders/fragment.shader"),
-	  m_Model("assets/head/")
+	  m_Model("assets/cube/")
 {
 	glEnable(GL_MULTISAMPLE);
 	glEnable(GL_DEPTH_TEST);
