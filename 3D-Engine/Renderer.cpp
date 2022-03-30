@@ -61,7 +61,7 @@ void Renderer::Run()
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
-		KeyboardInput(m_Window.GetWindow());
+		KeyboardInput();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -106,8 +106,10 @@ void Renderer::ToggleAntiAliasing()
 	}
 }
 
-void Renderer::KeyboardInput(GLFWwindow* window)
+void Renderer::KeyboardInput()
 {
+	GLFWwindow* window = m_Window.GetWindow();
+
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);

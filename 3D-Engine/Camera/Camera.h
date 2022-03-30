@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CAMERA_H
+#define CAMERA_H
 
 #include <iostream>
 #include <glm/glm.hpp>
@@ -47,3 +48,4 @@ private:
 	glm::vec3 m_Right;
 };
 
+#endif

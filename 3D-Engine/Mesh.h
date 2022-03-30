@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MESH_H
+#define MESH_H
 
 #include "Shader.h"
 #include "Buffers/VertexArray.h"
@@ -41,3 +42,4 @@ private:
 	Texture m_Texture;
 };
 
+#endif

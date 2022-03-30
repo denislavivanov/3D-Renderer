@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHADER_H
+#define SHADER_H
 
 #include <GL/glew.h>
 #include <string>
@@ -24,3 +25,4 @@ private:
 	GLuint m_ProgramID;
 };
 
+#endif

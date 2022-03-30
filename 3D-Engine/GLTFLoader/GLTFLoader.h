@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GLTFLOADER_H
+#define GLTFLOADER_H
 
 #include <vector>
 #include "../Mesh.h"
@@ -12,3 +13,4 @@ private:
 	static bool LoadBuffer(const std::string& path, std::vector<unsigned char>& buffer);
 };
 
+#endif

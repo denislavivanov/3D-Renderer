@@ -1,4 +1,5 @@
-#pragma once
+#ifndef INDEXBUFFER_H
+#define INDEXBUFFER_H
 
 #include <GL/glew.h>
 
@@ -21,3 +22,4 @@ private:
 	GLuint m_BufferID;
 };
 
+#endif

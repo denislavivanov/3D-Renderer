@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MODEL_H
+#define MODEL_H
 
 #include "Mesh.h"
 #include <vector>
@@ -17,3 +18,4 @@ private:
 	std::vector<Mesh> m_Meshes;
 };
 
+#endif
