@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TEXTURE_H
+#define TEXTURE_H
 
 #include <iostream>
 #include <GL/glew.h>
@@ -33,3 +34,4 @@ private:
 	GLuint m_TextureID;
 };
 
+#endif

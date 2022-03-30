@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VERTEXBUFFER_H
+#define VERTEXBUFFER_H
 
 #include <GL/glew.h>
 
@@ -22,3 +23,4 @@ private:
 	GLuint m_BufferID;
 };
 
+#endif

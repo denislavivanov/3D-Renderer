@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VERTEXARRAY_H
+#define VERTEXARRAY_H
 
 #include <vector>
 #include <GL/glew.h>
@@ -23,3 +24,4 @@ private:
 	GLuint m_VertexArrayID;
 };
 
+#endif
